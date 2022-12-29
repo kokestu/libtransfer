@@ -1,11 +1,3 @@
-import pandas as pd
-
-# Read the spreadsheet into a dataframe
-df = pd.read_excel('data/librarything_kokestu.xlsx')
-
-# Print the first few rows of the dataframe
-print(df.head())
-
 #################
 # Read the HTML #
 #################
@@ -31,6 +23,22 @@ for url in urls:
     image_data = response.content
 
     # Save the image to a file
-    file_name = url.split('/')[-1]
+    file_name = url.split('/')[-1]   # TODO: name the images appropriately
     with open(f"data/imgs/{file_name}", 'wb') as f:
         f.write(image_data)
+
+############################
+# Build the new Excel file #
+############################
+import pandas as pd
+
+# Read the spreadsheet into a dataframe
+df = pd.read_excel('data/librarything_kokestu.xlsx')
+
+# Print the first few rows of the dataframe
+print(df.head())
+
+## TODO: DO SOME STUFF
+final_df = df
+
+final_df.to_excel('out/MyLibrary.xlsx', sheet_name='Books', index=False)
